@@ -34,7 +34,7 @@ def get_lottery_results(content: str) -> List[Dict[str, Any]]:
 
         td_tags = tr_tags[i].find_all("td")
 
-        data["type"] = td_tags[0].text.replace("ó", "o").replace("ą", "a")
+        data["type"] = td_tags[0].text
         data["count"] = int(td_tags[1].text)
         data["value"] = float(td_tags[2].text.replace(" ", ""))
 
@@ -72,7 +72,7 @@ def parse_content(content: str) -> List[Optional[Dict[str, Any]]]:
             numbers.append(int(li_tags[i].text))
 
         data["numbers"] = numbers
-
+        print(data)
         a_tag = result.find("a")
 
         if a_tag:
@@ -83,14 +83,23 @@ def parse_content(content: str) -> List[Optional[Dict[str, Any]]]:
 
         res.append(data)
 
-    print(res)
+    return res
 
 
 def main() -> None:
-    year = "2024"
-    url = f"https://megalotto.pl/wyniki/lotto/losowania-z-roku-{year}"
-    content = get_page_content(url)
-    parse_content(content)
+    start_year = "2024"
+
+    games = {
+        "1957": "https://megalotto.pl/wyniki/lotto/losowania-z-roku-",
+        "2012": "https://megalotto.pl/wyniki/lotto-plus/losowania-z-roku-",
+        "1981": "https://megalotto.pl/wyniki/mini-lotto/losowania-z-roku-"
+    }
+
+    for end_year, url in games.items():
+        for i in range(int(end_year), int(start_year) + 1):
+            full_year = f"{url}{i}"
+            content = get_page_content(full_year)
+            parse_content(content)
 
     return None
 
