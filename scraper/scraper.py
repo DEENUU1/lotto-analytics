@@ -19,12 +19,28 @@ def get_page_content(url: str) -> Optional[str]:
         print(err)
         return None
 
-def get_lottery_results(content: str) -> Dict[str, Any]:
-    res = {}
+
+def get_lottery_results(content: str) -> List[Dict[str, Any]]:
+    res = []
 
     soup = BeautifulSoup(content, "html.parser")
-    pass
 
+    table_tag = soup.find("table", class_="dl_wygrane_table")
+
+    tr_tags = table_tag.find_all("tr")
+
+    for i in range(1, len(tr_tags)):
+        data = {}
+
+        td_tags = tr_tags[i].find_all("td")
+
+        data["type"] = td_tags[0].text.replace("ó", "o").replace("ą", "a")
+        data["count"] = int(td_tags[1].text)
+        data["value"] = float(td_tags[2].text.replace(" ", ""))
+
+        res.append(data)
+
+    return res
 
 
 def parse_content(content: str) -> List[Optional[Dict[str, Any]]]:
@@ -61,8 +77,8 @@ def parse_content(content: str) -> List[Optional[Dict[str, Any]]]:
 
         if a_tag:
             lottery_result_url = a_tag["href"]
-
-            lottery_result = get_lottery_results(lottery_result_url)
+            get_lottery_page = get_page_content(lottery_result_url)
+            lottery_result = get_lottery_results(get_lottery_page)
             data["lottery_result"] = lottery_result
 
         res.append(data)
