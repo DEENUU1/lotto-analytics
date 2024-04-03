@@ -2,6 +2,7 @@ from typing import Optional, List, Dict, Any
 
 import requests
 from bs4 import BeautifulSoup
+from export_to_csv import export_to_csv
 
 
 def get_page_content(url: str) -> Optional[str]:
@@ -72,7 +73,6 @@ def parse_content(content: str) -> List[Optional[Dict[str, Any]]]:
             numbers.append(int(li_tags[i].text))
 
         data["numbers"] = numbers
-        print(data)
         a_tag = result.find("a")
 
         if a_tag:
@@ -80,6 +80,7 @@ def parse_content(content: str) -> List[Optional[Dict[str, Any]]]:
             get_lottery_page = get_page_content(lottery_result_url)
             lottery_result = get_lottery_results(get_lottery_page)
             data["lottery_result"] = lottery_result
+        print(data)
 
         res.append(data)
 
@@ -90,16 +91,35 @@ def main() -> None:
     start_year = "2024"
 
     games = {
-        "1957": "https://megalotto.pl/wyniki/lotto/losowania-z-roku-",
+        # "1957": "https://megalotto.pl/wyniki/lotto/losowania-z-roku-",
         "2012": "https://megalotto.pl/wyniki/lotto-plus/losowania-z-roku-",
-        "1981": "https://megalotto.pl/wyniki/mini-lotto/losowania-z-roku-"
+        # "1981": "https://megalotto.pl/wyniki/mini-lotto/losowania-z-roku-"
+    }
+
+    game_filename_map = {
+        "lotto": "lotto.csv",
+        "lotto-plus": "lottopplus.csv",
+        "mini-lotto": "minilotto.csv"
     }
 
     for end_year, url in games.items():
+
+        data = []
+
+        game_key = url.split('/')[-2]
+
         for i in range(int(end_year), int(start_year) + 1):
             full_year = f"{url}{i}"
             content = get_page_content(full_year)
-            parse_content(content)
+            parsed_content = parse_content(content)
+            data.extend(parsed_content)
+
+            filename = game_filename_map.get(game_key)
+            filename_year = f"{i}-{filename}"
+            if filename:
+                export_to_csv(data=data, filename=filename_year)
+            else:
+                print(f"No filename found for game key '{game_key}'")
 
     return None
 
