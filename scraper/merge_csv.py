@@ -3,7 +3,13 @@ from typing import Final
 
 import pandas as pd
 
-OUTPUT_DIRECTORY_NAME: Final[str] = ".output/"
+OUTPUT_DIRECTORY_NAME: Final[str] = "./output/"
+
+if not os.path.exists(OUTPUT_DIRECTORY_NAME):
+    os.makedirs(OUTPUT_DIRECTORY_NAME)
+    print(f"Directory '{OUTPUT_DIRECTORY_NAME}' created successfully!")
+else:
+    print(f"Directory '{OUTPUT_DIRECTORY_NAME}' already exists.")
 
 
 def merge_csv(directory: str, output_filename: str) -> None:

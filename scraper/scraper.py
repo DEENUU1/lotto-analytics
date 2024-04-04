@@ -1,3 +1,4 @@
+import os.path
 from typing import Optional, List, Dict, Any
 
 import requests
@@ -28,7 +29,13 @@ def get_lottery_results(content: str) -> List[Dict[str, Any]]:
 
     table_tag = soup.find("table", class_="dl_wygrane_table")
 
+    if not table_tag:
+        return res
+
     tr_tags = table_tag.find_all("tr")
+
+    if not tr_tags:
+        return res
 
     for i in range(1, len(tr_tags)):
         data = {}
@@ -91,8 +98,8 @@ def main() -> None:
     start_year = "2024"
 
     games = {
-        # "1957": "https://megalotto.pl/wyniki/lotto/losowania-z-roku-",
-        "2012": "https://megalotto.pl/wyniki/lotto-plus/losowania-z-roku-",
+        "1957": "https://megalotto.pl/wyniki/lotto/losowania-z-roku-",
+        # "2012": "https://megalotto.pl/wyniki/lotto-plus/losowania-z-roku-",
         # "1981": "https://megalotto.pl/wyniki/mini-lotto/losowania-z-roku-"
     }
 
@@ -116,8 +123,14 @@ def main() -> None:
 
             filename = game_filename_map.get(game_key)
             filename_year = f"{i}-{filename}"
+
+            if not os.path.exists(f"./scraped_data/{game_key}"):
+                os.makedirs(f"./scraped_data/{game_key}")
+
+            full_file_path = f"./scraped_data/{game_key}/{filename_year}"
+
             if filename:
-                export_to_csv(data=data, filename=filename_year)
+                export_to_csv(data=data, filename=full_file_path)
             else:
                 print(f"No filename found for game key '{game_key}'")
 

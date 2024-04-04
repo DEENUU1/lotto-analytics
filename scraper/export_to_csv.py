@@ -7,14 +7,14 @@ def export_to_csv(data: List[dict], filename: str) -> None:
         'number',
         'date',
         'numbers',
-        'szóstka_count',
-        'szóstka_value',
-        'piątka_count',
-        'piątka_value',
-        'czwórka_count',
-        'czwórka_value',
-        'trójka_count',
-        'trójka_value'
+        'szostka_count',
+        'szostka_value',
+        'piatka_count',
+        'piatka_value',
+        'czworka_count',
+        'czworka_value',
+        'trojka_count',
+        'trojka_value'
     ]
 
     with open(filename, 'w', newline='') as csvfile:
@@ -26,28 +26,28 @@ def export_to_csv(data: List[dict], filename: str) -> None:
                 'number': entry['number'],
                 'date': entry['date'],
                 'numbers': ','.join(map(str, entry['numbers'])),
-                'szóstka_count': 0,
-                'szóstka_value': 0,
-                'piątka_count': 0,
-                'piątka_value': 0,
-                'czwórka_count': 0,
-                'czwórka_value': 0,
-                'trójka_count': 0,
-                'trójka_value': 0
+                'szostka_count': 0,
+                'szostka_value': 0,
+                'piatka_count': 0,
+                'piatka_value': 0,
+                'czworka_count': 0,
+                'czworka_value': 0,
+                'trojka_count': 0,
+                'trojka_value': 0
             }
 
             for result in entry.get('lottery_result', []):
                 if result['type'].startswith("sz"):
-                    flat_data['szóstka_count'] = result['count']
-                    flat_data['szóstka_value'] = result['value']
+                    flat_data['szostka_count'] = result['count']
+                    flat_data['szostka_value'] = result['value']
                 elif result['type'].startswith("pi"):
-                    flat_data['piątka_count'] = result['count']
-                    flat_data['piątka_value'] = result['value']
+                    flat_data['piatka_count'] = result['count']
+                    flat_data['piatka_value'] = result['value']
                 elif result['type'].startswith("czw"):
-                    flat_data['czwórka_count'] = result['count']
-                    flat_data['czwórka_value'] = result['value']
+                    flat_data['czworka_count'] = result['count']
+                    flat_data['czworka_value'] = result['value']
                 elif result['type'].startswith("tr"):
-                    flat_data['trójka_count'] = result['count']
-                    flat_data['trójka_value'] = result['value']
+                    flat_data['trojka_count'] = result['count']
+                    flat_data['trojka_value'] = result['value']
 
             writer.writerow(flat_data)
