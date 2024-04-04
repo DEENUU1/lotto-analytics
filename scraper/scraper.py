@@ -76,7 +76,7 @@ def parse_content(content: str) -> List[Optional[Dict[str, Any]]]:
 
         numbers = []
 
-        for i in range(2, 8):
+        for i in range(2, len(li_tags)):
             numbers.append(int(li_tags[i].text))
 
         data["numbers"] = numbers
@@ -99,8 +99,8 @@ def main() -> None:
 
     games = {
         "1957": "https://megalotto.pl/wyniki/lotto/losowania-z-roku-",
-        # "2012": "https://megalotto.pl/wyniki/lotto-plus/losowania-z-roku-",
-        # "1981": "https://megalotto.pl/wyniki/mini-lotto/losowania-z-roku-"
+        "2012": "https://megalotto.pl/wyniki/lotto-plus/losowania-z-roku-",
+        "1981": "https://megalotto.pl/wyniki/mini-lotto/losowania-z-roku-"
     }
 
     game_filename_map = {
