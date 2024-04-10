@@ -85,7 +85,7 @@
 </tr>
 </table>
 
-More data are available here:...
+<a href="https://github.com/DEENUU1/lotto-analytics/blob/main/most_common_numbers.ipynb">More data are available here</a>
 
 
 #### Most common number by year
@@ -122,7 +122,7 @@ In 2024 the most common numbers are:
 </tr>
 </table>
 
-More data are available here:...
+<a href="https://github.com/DEENUU1/lotto-analytics/blob/main/most_common_numbers.ipynb">More data are available here</a>
 
 #### Most common string numbers
 <table>
@@ -152,8 +152,7 @@ More data are available here:...
 </tr>
 </table>
 
-
-More data are available here:...
+<a href="https://github.com/DEENUU1/lotto-analytics/blob/main/most_common_numbers.ipynb">More data are available here</a>
 
 ### Lotto Plus
 
@@ -208,7 +207,7 @@ More data are available here:...
 </tr>
 </table>
 
-More data are available here:...
+<a href="https://github.com/DEENUU1/lotto-analytics/blob/main/most_common_numbers.ipynb">More data are available here</a>
 
 
 #### Most common number by year
@@ -245,7 +244,7 @@ In 2024 the most common numbers are:
 </tr>
 </table>
 
-More data are available here:...
+<a href="https://github.com/DEENUU1/lotto-analytics/blob/main/most_common_numbers.ipynb">More data are available here</a>
 
 #### Most common string numbers
 <table>
@@ -275,9 +274,7 @@ More data are available here:...
 </tr>
 </table>
 
-
-More data are available here:...
-
+<a href="https://github.com/DEENUU1/lotto-analytics/blob/main/most_common_numbers.ipynb">More data are available here</a>
 
 ### Mini Lotto
 
@@ -334,8 +331,7 @@ More data are available here:...
 </tr>
 </table>
 
-More data are available here:...
-
+<a href="https://github.com/DEENUU1/lotto-analytics/blob/main/most_common_numbers.ipynb">More data are available here</a>
 
 #### Most common number by year
 In 2024 the most common numbers are:
@@ -371,7 +367,7 @@ In 2024 the most common numbers are:
 </tr>
 </table>
 
-More data are available here:...
+<a href="https://github.com/DEENUU1/lotto-analytics/blob/main/most_common_numbers.ipynb">More data are available here</a>
 
 #### Most common string numbers
 <table>
@@ -401,9 +397,7 @@ More data are available here:...
 </tr>
 </table>
 
-
-More data are available here:...
-
+<a href="https://github.com/DEENUU1/lotto-analytics/blob/main/most_common_numbers.ipynb">More data are available here</a>
 
 ## Technologies:
 - Python
